@@ -22,7 +22,7 @@ Welcome to the MONDB API! You can use our API to access MONDB API endpoints, whi
 The API is splitted in 4 parts : 
 
 * **FCDB** : Food Composition
-* **NRVDB** : Nutriend Reference Values
+* **NRVDB** : Nutrient Reference Values
 * **CPADB** : Compendium of Physical Activities
 * **DNRDB** : Diaries and Nutrition Research data
 
