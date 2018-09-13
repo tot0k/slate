@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>MONDB API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;curl&quot;,&quot;php&quot;]">
+  <body class="index" data-languages="[&quot;curl&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,7 +212,6 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="curl">curl</a>
-              <a href="#" data-language-name="php">php</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -223,21 +222,48 @@
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
           </li>
           <li>
+            <a href="#response-format" class="toc-h1 toc-link" data-title="Response format">Response format</a>
+          </li>
+          <li>
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#fcdb" class="toc-h1 toc-link" data-title="FCDB">FCDB</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#dataset" class="toc-h2 toc-link" data-title="Dataset">Dataset</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#data-type" class="toc-h2 toc-link" data-title="Data Type">Data Type</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#parameter-value" class="toc-h2 toc-link" data-title="Parameter / Value">Parameter / Value</a>
+                  </li>
+                  <li>
+                    <a href="#url-parameters" class="toc-h2 toc-link" data-title="URL Parameters">URL Parameters</a>
+                  </li>
+                  <li>
+                    <a href="#db" class="toc-h2 toc-link" data-title="db">db</a>
+                  </li>
+                  <li>
+                    <a href="#start-and-count" class="toc-h2 toc-link" data-title="start and count">start and count</a>
+                  </li>
+                  <li>
+                    <a href="#query" class="toc-h2 toc-link" data-title="Query">Query</a>
+                  </li>
+                  <li>
+                    <a href="#type" class="toc-h2 toc-link" data-title="Type">Type</a>
                   </li>
               </ul>
+          </li>
+          <li>
+            <a href="#nrvdb" class="toc-h1 toc-link" data-title="NRVDB">NRVDB</a>
+          </li>
+          <li>
+            <a href="#cpadb" class="toc-h1 toc-link" data-title="CPADB">CPADB</a>
+          </li>
+          <li>
+            <a href="#dnrdb" class="toc-h1 toc-link" data-title="DNRDB">DNRDB</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
@@ -252,7 +278,8 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the MONDB API! You can use our API to access MONDB API endpoints, which can get information about Foods, Nutrient Reference Values, Physical activities and Nutrition Guidelines.</p>
+<p>Welcome to the MONDB API! You can use our API to access MONDB API endpoints, which can get information about Foods, Nutrient Reference Values, Physical activities and Nutrition Guidelines.
+The goal of MONDB is to provide a knowledge base about nutrition in a standardized way. We regrouped and parsed databases from allover the world, so you can query them the same way everytime.</p>
 
 <p>The API is splitted in 4 parts : </p>
 
@@ -264,171 +291,352 @@
 </ul>
 
 <p>You can view code examples in the dark area to the right.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight plaintext"><code># With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+<h1 id='response-format'>Response format</h1><pre class="highlight plaintext"><code>curl "http://mondb.local/api/fcdb/food/"
+  --request GET
+    -H "type: json"
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>The above command returns JSON structured like this</p>
 </blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ciqual-2017v1"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">2807</span><span class="w">
+           </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-2018"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+           </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="w">
+           </span><span class="p">}</span><span class="w">
+       </span><span class="p">]</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight plaintext"><code>curl "http://mondb.local/api/fcdb/food/"
+  --request GET
+    -H "type: xml"
+</code></pre>
+<blockquote>
+<p>The above command returns XML structured like this</p>
+</blockquote>
+<pre class="highlight xml tab-xml"><code>  <span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+  <span class="nt">&lt;xml&gt;</span>
+      <span class="nt">&lt;success&gt;</span>true<span class="nt">&lt;/success&gt;</span>
+      <span class="nt">&lt;response&gt;</span>
+          <span class="nt">&lt;object&gt;</span>
+              <span class="nt">&lt;dataset&gt;</span>ciqual-2017v1<span class="nt">&lt;/dataset&gt;</span>
+              <span class="nt">&lt;results&gt;</span>2807<span class="nt">&lt;/results&gt;</span>
+          <span class="nt">&lt;/object&gt;</span>
+          <span class="nt">&lt;object&gt;</span>
+              <span class="nt">&lt;dataset&gt;</span>example-2018<span class="nt">&lt;/dataset&gt;</span>
+              <span class="nt">&lt;results&gt;</span>2<span class="nt">&lt;/results&gt;</span>
+          <span class="nt">&lt;/object&gt;</span>
+          <span class="nt">&lt;object&gt;</span>
+              <span class="nt">&lt;dataset&gt;</span>test<span class="nt">&lt;/dataset&gt;</span>
+              <span class="nt">&lt;results&gt;</span>91<span class="nt">&lt;/results&gt;</span>
+          <span class="nt">&lt;/object&gt;</span>
+      <span class="nt">&lt;/response&gt;</span>
+  <span class="nt">&lt;/xml&gt;</span>
+</code></pre>
+<p>The response is always structured with a <code>success</code> boolean, and the response.
+You can specify the format of data you want to be returned.
+You can choose between</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<ul>
+<li>JSON</li>
+<li>XML</li>
+</ul>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>Example : 
+<code>GET http://mondb.local/fcdb/food/?type=json</code> will return you a JSON object
+<code>GET http://mondb.local/fcdb/food/?type=xml</code> will return you a XML object</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+The default return type is JSON
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>If the response is an error, it will have an API error <code>id</code>, a <code>description</code> and a <code>message</code>, to help you correct your request.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Architecture of an API error in JSON</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not found"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown ressource"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Architecture of an API error in XML</p>
+</blockquote>
+<pre class="highlight xml tab-xml"><code>    <span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+    <span class="nt">&lt;xml&gt;</span>
+        <span class="nt">&lt;success&gt;</span>false<span class="nt">&lt;/success&gt;</span>
+        <span class="nt">&lt;error&gt;</span>
+            <span class="nt">&lt;id&gt;</span>2<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;description&gt;</span>Not found<span class="nt">&lt;/description&gt;</span>
+            <span class="nt">&lt;message&gt;</span>Unknown ressource<span class="nt">&lt;/message&gt;</span>
+        <span class="nt">&lt;/error&gt;</span>
+    <span class="nt">&lt;/xml&gt;</span>
+</code></pre><h1 id='authentication'>Authentication</h1>
+<p>The Auth process is based on JWT tokens.</p>
+
+<blockquote>
+<p>To retrieve your token, use this code:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://mondb.local/api/dnrdb/token/"
+  --request GET
+    -H "email: &lt;yourEmail&gt;"
+    -H "password: &lt;yourPassword&gt;"
+</code></pre>
+<p><code>GET http://mondb.local/api/dnrdb/token/?email=&quot;your@email.com&amp;password=&quot;yourStrongPassword&quot;</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your.JWT.Token"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1536807587</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<aside class="notice">
+The `exp` value is the expirency timestamp of the token. When a request fails, check if the token is still valid !
+</aside>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<p>You must <a href="http://mondb.local/totok/passwordEncrypt.php">register</a> to be able to retrieve a token.</p>
+<h1 id='fcdb'>FCDB</h1>
+<p>The FCDB database contains information about foods and meals.</p>
+
+<p>You do not need to provide a Auth token to access any of these data</p>
+
+<p>A basic request to the FCDB database :</p>
+
+<p><code>GET http://mondb.local/api/fcdb/&lt;dataset&gt;/&lt;dataType&gt;/&lt;parameter&gt;/&lt;value&gt;?&lt;URL Parameters&gt;</code></p>
+<h2 id='dataset'>Dataset</h2>
+<p>When we add information from a database, we add them in a new dataset, which stores only data from the same source (eg : Ciqual French Open Data, or New Zealand Data).
+To have a list of the different datasets, use this request</p>
+
+<blockquote>
+<p>To get the list of the different datasets use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://mondb.local/api/fcdb/food"
+</code></pre>
+<p><code>GET http://mondb.local/api/fcdb/food</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ciqual-2017v1"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">2807</span><span class="w">
+           </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-2018"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+           </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="w">
+           </span><span class="p">}</span><span class="w">
+       </span><span class="p">]</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The <code>results</code> number is the amount of foods stored in the dataset.</p>
+
+<p>After choosing the dataset, you just have to do the same request, with the name of the dataset precised in argument.
+<code>GET http://mondb.local/api/fcdb/food?db=ciqual-2017v1</code></p>
+<pre class="highlight plaintext"><code>"http://mondb.local/api/fcdb/food"
+  --request GET
+  -H "db: ciqual2017-v1"
+</code></pre><h2 id='data-type'>Data Type</h2>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>Data Type</th>
+<th>Utility</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>component</td>
+<td>Information about specific components (name, unit, etc).</td>
+</tr>
+<tr>
+<td>food</td>
+<td>Information about the food (name, description, group).</td>
+</tr>
+<tr>
+<td>meal</td>
+<td>Information about the meal (name, description, group).</td>
+</tr>
+<tr>
+<td>foodComposition</td>
+<td>Stores the composition of each food.</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Stores the provenance of each information.</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>Stores the relations between the different units in the different datasets, so you can easily switch from one unit to the other.</td>
+</tr>
+<tr>
+<td>foodGroup</td>
+<td>Regroups the foods by type</td>
+</tr>
+<tr>
+<td>mealGroup</td>
+<td>Regroups the meals by type</td>
+</tr>
+<tr>
+<td>componentGroup</td>
+<td>Regroups the components by family, to link them between the different datasets</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>The <code>&lt;dataset&gt;</code> section is here to specify in which database you want to do your query (The French Database ? The New Zealand one ?)</p>
+<h2 id='parameter-value'>Parameter / Value</h2>
+<p>Every element of the datasets files has an <code>id</code> and a <code>name</code> you can use to do simple research. They are some others default parameters, depending of the data type</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<table><thead>
+<tr>
+<th>Data Type</th>
+<th>Default Parameters</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>component</td>
+<td>grp_id</td>
+</tr>
+<tr>
+<td>food</td>
+<td>description, grp_id</td>
+</tr>
+<tr>
+<td>meal</td>
+<td>description, grp_id</td>
+</tr>
+<tr>
+<td>foodComposition</td>
+<td>value, unit_id, trust_code, source_id</td>
+</tr>
+<tr>
+<td>source</td>
+<td></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>numerator, denominator, factor</td>
+</tr>
+<tr>
+<td>foodGroup</td>
+<td>parent_id</td>
+</tr>
+<tr>
+<td>mealGroup</td>
+<td>parent_id</td>
+</tr>
+<tr>
+<td>componentGroup</td>
+<td>parent_id</td>
+</tr>
+</tbody></table>
+<h2 id='url-parameters'>URL Parameters</h2>
+<p>You may want to add additional arguments to your research. For each request, you can add the following arguments.</p>
+<h2 id='db'>db</h2>
+<blockquote>
+<p>To query the food of the dataset <code>ciqual-2017v1</code> use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://mondb.local/api/fcdb/food/"
+  --request GET
+    -H "db: ciqual-2017v1"
+</code></pre>
+<p>As said before, you may precise in which dataset you want to do your query.
+Just add the <code>db</code> parameter to precise in which dataset you want to do it.</p>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<p><code>GET http://mondb.local/api/fcdb/food?db=ciqual-2017v1</code></p>
+<h2 id='start-and-count'>start and count</h2>
+<blockquote>
+<p>To query 2 foods, starting at index 1000 of request, use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://mondb.local/api/fcdb/food/"
+  --request GET
+    -H "start: 1000"
+    -H "count: 2"
+    -H "db: ciqual-2017v1"
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>The above command returns JSON structured like this</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2807</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"database_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ciqual-2017v1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dvo4u91696solknmnq0ju06dthb9d7jp"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Almond oil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6s6ia6jfv3xit28pfirb0dmh3nruy9t"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vegetable oils"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ehwkax1opelveomxtcyery1az35qzxo"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fats and oils"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Almond oil"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
+<p>If a request returns many elements, it returns by default only the 10 first. You can change this number by adding the parameter <code>count</code>.
+You can also change the index of the first element returned by adding the parameter <code>start</code>.</p>
+
+<p>Example : <code>GET http://mondb.local/api/fcdb/food/?start=1000&amp;count=2&amp;db=ciqual-2017v1</code></p>
+<h2 id='query'>Query</h2>
+<blockquote>
+<p>Example of a query with additional parameters</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://mondb.local/api/fcdb/food/grp_id/12345"
+  --request GET
+    -H "db: dataset"
+    -H "query: parameter1=value1,parameter2&lt;value2"
+</code></pre>
+<p>You can add additional query information about the parameters of the resource you are querying.</p>
+
+<p>You can use the following operators</p>
+
+<ul>
+<li>=</li>
+<li>!=</li>
+<li>&lt;</li>
+<li>&gt;</li>
+</ul>
+
+<p>You must separate the fields by comma (<code>,</code>).</p>
+
+<p>Example : </p>
+
+<p><code>GET http://mondb.local/fcdb/food/grp_id/12345/?db=dataset&amp;query=parameter1=value1,parameter2&lt;value2</code></p>
+<h2 id='type'>Type</h2>
+<p>Refer to the Response Format part.</p>
+<h1 id='nrvdb'>NRVDB</h1><h1 id='cpadb'>CPADB</h1><h1 id='dnrdb'>DNRDB</h1><h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
 </aside>
@@ -491,7 +699,6 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="curl">curl</a>
-                <a href="#" data-language-name="php">php</a>
           </div>
       </div>
     </div>
