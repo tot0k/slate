@@ -1,0 +1,960 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>MONDB API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;curl&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo.png" class="logo" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="curl">curl</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#response-format" class="toc-h1 toc-link" data-title="Response format">Response format</a>
+          </li>
+          <li>
+            <a href="#url-parameters" class="toc-h1 toc-link" data-title="URL Parameters">URL Parameters</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#fcdb" class="toc-h1 toc-link" data-title="FCDB">FCDB</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#dataset" class="toc-h2 toc-link" data-title="Dataset">Dataset</a>
+                  </li>
+                  <li>
+                    <a href="#data-type" class="toc-h2 toc-link" data-title="Data Type">Data Type</a>
+                  </li>
+                  <li>
+                    <a href="#parameter-value" class="toc-h2 toc-link" data-title="Parameter / Value">Parameter / Value</a>
+                  </li>
+                  <li>
+                    <a href="#url-parameters-2" class="toc-h2 toc-link" data-title="URL Parameters">URL Parameters</a>
+                  </li>
+                  <li>
+                    <a href="#search" class="toc-h2 toc-link" data-title="Search">Search</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#nrvdb" class="toc-h1 toc-link" data-title="NRVDB">NRVDB</a>
+          </li>
+          <li>
+            <a href="#cpadb" class="toc-h1 toc-link" data-title="CPADB">CPADB</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#resources" class="toc-h2 toc-link" data-title="Resources">Resources</a>
+                  </li>
+                  <li>
+                    <a href="#activity" class="toc-h2 toc-link" data-title="Activity">Activity</a>
+                  </li>
+                  <li>
+                    <a href="#activity-type" class="toc-h2 toc-link" data-title="Activity Type">Activity Type</a>
+                  </li>
+                  <li>
+                    <a href="#parameter-value-2" class="toc-h2 toc-link" data-title="Parameter / Value">Parameter / Value</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#dnrdb" class="toc-h1 toc-link" data-title="DNRDB">DNRDB</a>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up</a></li>
+            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to the MONDB API! You can use our API to access MONDB API endpoints, which can get information about Foods, Nutrient Reference Values, Physical activities and Nutrition Guidelines.
+The goal of MONDB is to provide a knowledge base about nutrition in a standardized way. We regrouped and parsed databases from allover the world, so you can query them the same way everytime.</p>
+
+<p>The API is splitted in 4 parts : </p>
+
+<ul>
+<li><strong>FCDB</strong> : Food Composition</li>
+<li><strong>NRVDB</strong> : Nutrient Reference Values</li>
+<li><strong>CPADB</strong> : Compendium of Physical Activities</li>
+<li><strong>DNRDB</strong> : Diaries and Nutrition Research data</li>
+</ul>
+
+<p>You can view code examples in the dark area to the right.</p>
+<h1 id='response-format'>Response format</h1><pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/fcdb/food/"
+  --request GET
+    -H "type: json"
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ciqual-2017v1"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">2807</span><span class="w">
+           </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-2018"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+           </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="w">
+           </span><span class="p">}</span><span class="w">
+       </span><span class="p">]</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span></code></pre><pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/fcdb/food/"
+  --request GET
+    -H "type: xml"
+</code></pre>
+<blockquote>
+<p>The above command returns XML structured like this</p>
+</blockquote>
+<pre class="highlight xml tab-xml"><code>  <span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+  <span class="nt">&lt;xml&gt;</span>
+      <span class="nt">&lt;success&gt;</span>true<span class="nt">&lt;/success&gt;</span>
+      <span class="nt">&lt;response&gt;</span>
+          <span class="nt">&lt;object&gt;</span>
+              <span class="nt">&lt;dataset&gt;</span>ciqual-2017v1<span class="nt">&lt;/dataset&gt;</span>
+              <span class="nt">&lt;results&gt;</span>2807<span class="nt">&lt;/results&gt;</span>
+          <span class="nt">&lt;/object&gt;</span>
+          <span class="nt">&lt;object&gt;</span>
+              <span class="nt">&lt;dataset&gt;</span>example-2018<span class="nt">&lt;/dataset&gt;</span>
+              <span class="nt">&lt;results&gt;</span>2<span class="nt">&lt;/results&gt;</span>
+          <span class="nt">&lt;/object&gt;</span>
+          <span class="nt">&lt;object&gt;</span>
+              <span class="nt">&lt;dataset&gt;</span>test<span class="nt">&lt;/dataset&gt;</span>
+              <span class="nt">&lt;results&gt;</span>91<span class="nt">&lt;/results&gt;</span>
+          <span class="nt">&lt;/object&gt;</span>
+      <span class="nt">&lt;/response&gt;</span>
+  <span class="nt">&lt;/xml&gt;</span>
+</code></pre>
+<p>The response is always structured with a <code>success</code> boolean, and the response.
+You can specify the format of data you want to be returned.
+You can choose between</p>
+
+<ul>
+<li>JSON</li>
+<li>XML</li>
+</ul>
+
+<p>Example : 
+<code>GET fcdb/food/?type=json</code> will return you a JSON object
+<code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/food/?type=xml</code> will return you a XML object</p>
+
+<aside class="notice">
+The default return type is JSON
+</aside>
+
+<p>If the response is an error, it will have an API error <code>id</code>, a <code>description</code> and a <code>message</code>, to help you correct your request.</p>
+
+<blockquote>
+<p>Architecture of an API error in JSON</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"error"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Not found"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unknown ressource"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Architecture of an API error in XML</p>
+</blockquote>
+<pre class="highlight xml tab-xml"><code>    <span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+    <span class="nt">&lt;xml&gt;</span>
+        <span class="nt">&lt;success&gt;</span>false<span class="nt">&lt;/success&gt;</span>
+        <span class="nt">&lt;error&gt;</span>
+            <span class="nt">&lt;id&gt;</span>2<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;description&gt;</span>Not found<span class="nt">&lt;/description&gt;</span>
+            <span class="nt">&lt;message&gt;</span>Unknown ressource<span class="nt">&lt;/message&gt;</span>
+        <span class="nt">&lt;/error&gt;</span>
+    <span class="nt">&lt;/xml&gt;</span>
+</code></pre><h1 id='url-parameters'>URL Parameters</h1>
+<p>In each request, you can specify how many elements you want to be returned, and the index of the first element returned.</p>
+
+<blockquote>
+<p>To query 2 foods, starting at index 1000 of request, use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/fcdb/food/"
+  --request GET
+    -H "start: 1000"
+    -H "count: 2"
+    -H "db: ciqual-2017v1"
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">2807</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"database_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ciqual-2017v1"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dvo4u91696solknmnq0ju06dthb9d7jp"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Almond oil"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6s6ia6jfv3xit28pfirb0dmh3nruy9t"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vegetable oils"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ehwkax1opelveomxtcyery1az35qzxo"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fats and oils"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Almond oil"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="err">...</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>If a matches with many elements, it returns by default only the 10 first. You can change this number by adding the parameter <code>count</code>.
+You can also change the index of the first element returned by adding the parameter <code>start</code>.</p>
+
+<p>Example : <code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/food/?start=1000&amp;count=2&amp;db=ciqual-2017v1</code></p>
+<h1 id='authentication'>Authentication</h1>
+<p>The Auth process is based on JWT tokens.</p>
+
+<blockquote>
+<p>To retrieve your token, use this code:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/dnrdb/token/"
+  --request GET
+    -H "email: &lt;yourEmail&gt;"
+    -H "password: &lt;yourPassword&gt;"
+</code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/dnrdb/token/?email=&quot;your@email.com&amp;password=&quot;yourStrongPassword&quot;</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your.JWT.Token"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"exp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1536807587</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+The `exp` value is the expirency timestamp of the token. When a request fails, check if the token is still valid !
+</aside>
+
+<p>You must <a href="http://farmit.massey.ac.nz/~mondb/index.php?routing=register">register</a> to be able to retrieve a token.</p>
+<h1 id='fcdb'>FCDB</h1>
+<p>The FCDB database contains information about foods and meals.</p>
+
+<p>You do not need to provide a Auth token to access any of these data</p>
+
+<p>A basic request to the FCDB database :</p>
+
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/&lt;dataType&gt;/&lt;parameter&gt;/&lt;value&gt;?&lt;URL Parameters&gt;&amp;db=&lt;dataset&gt;</code></p>
+<h2 id='dataset'>Dataset</h2>
+<p>When we add information from a database, we add them in a new dataset, which stores only data from the same source (eg : Ciqual French Open Data, or New Zealand Data).
+To have a list of the different datasets, use this request</p>
+
+<blockquote>
+<p>To get the list of the different datasets use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/fcdb/food"
+</code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/food</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+       </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ciqual-2017v1"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">2807</span><span class="w">
+           </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example-2018"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+           </span><span class="p">},</span><span class="w">
+           </span><span class="p">{</span><span class="w">
+               </span><span class="s2">"dataset"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test"</span><span class="p">,</span><span class="w">
+               </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">91</span><span class="w">
+           </span><span class="p">}</span><span class="w">
+       </span><span class="p">]</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>The <code>results</code> number is the amount of foods stored in the dataset.</p>
+
+<p>After choosing the dataset, you just have to do the same request, with the name of the dataset precised in argument.
+<code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/food?db=ciqual-2017v1</code></p>
+<pre class="highlight plaintext"><code>"http://farmit.massey.ac.nz/~mondb/api/fcdb/food"
+  --request GET
+  -H "db: ciqual2017-v1"
+</code></pre><h2 id='data-type'>Data Type</h2>
+<table><thead>
+<tr>
+<th>Data Type</th>
+<th>Utility</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>component</td>
+<td>Information about specific components (name, unit, etc).</td>
+</tr>
+<tr>
+<td>food</td>
+<td>Information about the food (name, description, group).</td>
+</tr>
+<tr>
+<td>meal</td>
+<td>Information about the meal (name, description, group).</td>
+</tr>
+<tr>
+<td>foodComposition</td>
+<td>Stores the composition of each food.</td>
+</tr>
+<tr>
+<td>source</td>
+<td>Stores the provenance of each information.</td>
+</tr>
+<tr>
+<td>unit</td>
+<td>Stores the relations between the different units in the different datasets, so you can easily switch from one unit to the other.</td>
+</tr>
+<tr>
+<td>foodGroup</td>
+<td>Regroups the foods by type</td>
+</tr>
+<tr>
+<td>mealGroup</td>
+<td>Regroups the meals by type</td>
+</tr>
+<tr>
+<td>componentGroup</td>
+<td>Regroups the components by family, to link them between the different datasets</td>
+</tr>
+</tbody></table>
+
+<p>The <code>&lt;dataset&gt;</code> section is here to specify in which database you want to do your query (The French Database ? The New Zealand one ?)</p>
+<h2 id='parameter-value'>Parameter / Value</h2>
+<blockquote>
+<p>Example of a request for a food named &quot;Chocapic&quot; in the French database</p>
+</blockquote>
+<pre class="highlight plaintext"><code>"http://farmit.massey.ac.nz/~mondb/api/fcdb/food/name/Chocapic"
+  --request GET
+  -H "db: ciqual2017-v1"
+</code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/food/name/Chocapic?db=ciqual-2017v1</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"database_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ciqual-2017v1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f2dqt120dub7kidv0vefm0qkdgx0f766"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chocapic"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"group"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f55tk78z7ls962vyyaqh66qmxsfk4p84"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"breakfast cereals"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2x0tuj9wgaz3g05m9h74mpdj8e6aod74"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"biscuits and breakfast cereals"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"parent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d2f6lgk2jwklpvkeemvu1n4hs5588bgz"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cereal products"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Breakfast cereals, with chocolate, not filled, fortified with vitamins and chemical elements"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Every element of the datasets files has an <code>id</code> and a <code>name</code> you can use to do simple research. They are some others default parameters, depending of the data type</p>
+
+<table><thead>
+<tr>
+<th>Data Type</th>
+<th>Default Parameters</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>component</td>
+<td>grp_id</td>
+</tr>
+<tr>
+<td>food</td>
+<td>description, grp_id</td>
+</tr>
+<tr>
+<td>meal</td>
+<td>description, grp_id</td>
+</tr>
+<tr>
+<td>foodComposition</td>
+<td>value, unit_id, trust_code, source_id</td>
+</tr>
+<tr>
+<td>source</td>
+<td></td>
+</tr>
+<tr>
+<td>unit</td>
+<td>numerator, denominator, factor</td>
+</tr>
+<tr>
+<td>foodGroup</td>
+<td>parent_id</td>
+</tr>
+<tr>
+<td>mealGroup</td>
+<td>parent_id</td>
+</tr>
+<tr>
+<td>componentGroup</td>
+<td>parent_id</td>
+</tr>
+</tbody></table>
+<h2 id='url-parameters-2'>URL Parameters</h2>
+<p>You may want to add additional arguments to your research. For each request, you can add the following arguments and all the arguments of the <a href="#url-parameters">URL Parameters</a> section.</p>
+<h3 id='db'>db</h3>
+<blockquote>
+<p>To query the food of the dataset <code>ciqual-2017v1</code> use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/fcdb/food/"
+  --request GET
+    -H "db: ciqual-2017v1"
+</code></pre>
+<p>As said before, you may precise in which dataset you want to do your query.
+Just add the <code>db</code> parameter to precise in which dataset you want to do it.</p>
+
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/food?db=ciqual-2017v1</code></p>
+<h3 id='query'>Query</h3>
+<blockquote>
+<p>Example of a query with additional parameters</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/fcdb/food/grp_id/12345"
+  --request GET
+    -H "db: dataset"
+    -H "query: parameter1=value1,parameter2&lt;value2"
+</code></pre>
+<p>You can add additional query information about the parameters of the resource you are querying.</p>
+
+<p>You can use the following operators</p>
+
+<ul>
+<li>=</li>
+<li>!=</li>
+<li>&lt;</li>
+<li>&gt;</li>
+</ul>
+
+<p>You must separate the fields by comma (<code>,</code>).</p>
+
+<p>Example : </p>
+
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/food/grp_id/12345/?db=dataset&amp;query=parameter1=value1,parameter2&lt;value2</code></p>
+<h3 id='type'>Type</h3>
+<p>Refer to the <a href="#response-format">Response Format</a> section.</p>
+<h2 id='search'>Search</h2>
+<p>You can search for a word or group of words in the name and description of foods with the following command.</p>
+
+<blockquote>
+<p>To get the list of the different resources use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/fcdb/search"
+  --request GET
+    -H "db: dataset"
+    -H "search: "The String you are searching for"
+</code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/fcdb/search?db=ciqual-2017v1&amp;search=pain</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mitruwprv5rjmheqyprzffwo4dl2z2ov"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pain panini"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"vtf6ldssrbra29g6soxogk8i94oe0cq6"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pain d'épices"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h1 id='nrvdb'>NRVDB</h1><h1 id='cpadb'>CPADB</h1>
+<p>The Compendium of Physical Activities DataBase contains <code>met</code> information about human activities.</p>
+<h2 id='resources'>Resources</h2>
+<p>You can query the list of the resources available with the following command.</p>
+
+<blockquote>
+<p>To get the list of the different resources use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/cpadb"
+</code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/cpadb</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activity.xml"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">832</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"activityType.xml"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="mi">22</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='activity'>Activity</h2>
+<p>You can query the list of all the activities with the following command.</p>
+
+<blockquote>
+<p>To get the list of the different activities use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/cpadb/activity/"
+</code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/cpadb/activity/</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">821</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usrsbfewr97dipch2rfl81cexhyk9s8i"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01003"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bicycling, mountain, uphill, vigorous"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"met"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7asnmi575n05hb6mog0gfzrs0huic8va"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bicycling"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+You can use the `count` and `start` parameters to query a specific part of the list
+</aside>
+
+<aside class="notice">
+You can use the `type` parameter to change the response type (XML / JSON)
+</aside>
+<h2 id='activity-type'>Activity Type</h2>
+<p>You can query the list of all the activity types with the following command.</p>
+
+<blockquote>
+<p>To get the list of the different activity types use this code</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/cpadb/activityType/"
+</code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/cpadb/activityType/</code></p>
+
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7asnmi575n05hb6mog0gfzrs0huic8va"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bicycling"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<aside class="notice">
+You can use the `count` and `start` parameters to query a specific part of the list
+</aside>
+
+<aside class="notice">
+You can use the `type` parameter to change the response type (XML / JSON)
+</aside>
+<h2 id='parameter-value-2'>Parameter / Value</h2>
+<p>They are some others default parameters, depending of the resource</p>
+
+<table><thead>
+<tr>
+<th>Data Type</th>
+<th>Default Parameters</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>activity</td>
+<td>id, code, description, met, type_id</td>
+</tr>
+<tr>
+<td>activity Type</td>
+<td>id, code, name</td>
+</tr>
+</tbody></table>
+<h3 id='example'>Example</h3>
+<p>To query the list of the activities that are about bicycling, you need to do 2 requests :</p>
+
+<blockquote>
+<p>To query the activityType which name is &quot;bicycling do the following command&quot;</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/cpadb/activityType/name/bicycling"
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7asnmi575n05hb6mog0gfzrs0huic8va"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bicycling"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/cpadb/activityType/name/bicycling</code>
+To query the id of the type bicycling</p>
+
+<blockquote>
+<p>To query the activities about &quot;bicycling&quot;, do the following command</p>
+</blockquote>
+<pre class="highlight plaintext"><code>curl "http://farmit.massey.ac.nz/~mondb/api/cpadb/activity/type_id/7asnmi575n05hb6mog0gfzrs0huic8va"
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"start"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"end"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"total"</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usrsbfewr97dipch2rfl81cexhyk9s8i"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01003"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bicycling, mountain, uphill, vigorous"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"met"</span><span class="p">:</span><span class="w"> </span><span class="s2">"14"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7asnmi575n05hb6mog0gfzrs0huic8va"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01"</span><span class="p">,</span><span class="w">
+                  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bicycling"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p><code>GET http://farmit.massey.ac.nz/~mondb/api/cpadb/activity/type_id/httdhjtsums9z477kd927wy2kx25ge3x</code>
+To query list of activities that have this type_id</p>
+
+<aside class="notice">
+You can use the `count` and `start` parameters to query a specific part of the list
+</aside>
+
+<aside class="notice">
+You can use the `type` parameter to change the response type (XML / JSON)
+</aside>
+<h1 id='dnrdb'>DNRDB</h1><h1 id='errors'>Errors</h1>
+<p>The MONDB API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized -- Your API key is wrong.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden -- The resource requested is hidden for administrators only.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified resource could not be found.</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed -- You tried to access a resource with an invalid method.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests -- Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="curl">curl</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
